@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ztom.learning.seimi.dao.ShiShiCaiLotteryRecordDao">
+    <resultMap type="com.ztom.learning.seimi.model.ShiShiCaiLotteryRecord" id="lotteryrecord_result">
+        <id column="recordId" property="recordId" />
+        <result column="recordDetails" property="recordDetails" />
+        <result column="lotteryTime" property="lotteryTime" jdbcType="TIMESTAMP"
+        javaType="java.util.Date" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"
+            javaType="java.util.Date" />
+    </resultMap>
+    <sql id="column">
+        `recordId`, `recordDetails`, `lotteryTime`, `createTime`
+    </sql>
+    <select id="getAll" resultMap="lotteryrecord_result">
+        SELECT
+        <include refid="column" />
+        FROM `lottery_record_shishicai`
+    </select>
+    <insert id="insert" parameterType="com.ztom.learning.seimi.model.ShiShiCaiLotteryRecord">
+        INSERT INTO `lottery_record_shishicai`
+        (`recordId`, `recordDetails`, `lotteryTime`, `createTime`)
+        VALUES
+        (#{recordId},
+        #{recordDetails},
+        #{lotteryTime})
+    </insert>
+</mapper>
